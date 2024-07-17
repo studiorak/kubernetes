@@ -14,7 +14,7 @@ provider "aws" {
 resource "aws_instance" "kube" {
   ami           = "ami-04a81a99f5ec58529"
   instance_type = "t2.micro"
-  key_name      = "automation"
+  key_name      = "test"
   tags = {
     Name = "kube"
   }
@@ -35,9 +35,9 @@ resource "aws_default_security_group" "default" {
   vpc_id = aws_default_vpc.default.id
 
   ingress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
