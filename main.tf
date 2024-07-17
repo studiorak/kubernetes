@@ -1,21 +1,20 @@
-variable "region" {
-  default = "us-east-1"
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
 }
 
 provider "aws" {
-  profile = "default"
-  region  = var.region
+  region = "us-east-1"
 }
 
-resource "aws_instance" "server" {
-  ami           = "ami-04c58523038d79132" # Ubunutu Bionic
+resource "aws_instance" "kube" {
+  ami           = "ami-04a81a99f5ec58529"
   instance_type = "t2.micro"
   key_name      = "automation"
-  root_block_device {
-    volume_size           = "10"
-    volume_type           = "standard"
-    delete_on_termination = "false"
-  }
   tags = {
     Name = "kube"
   }
